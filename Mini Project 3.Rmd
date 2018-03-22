@@ -43,26 +43,4 @@ poll_graph
 
 
 
-```{r}
-northeast <- poll_results%>%
- filter(state %in% c("CT","ME","MA","NH","RI","VT","NJ","NY","PA"))%>%
-  summarize( Northeast = sum(Total_votes))
-```
-```{r}
-midwest <- poll_results%>%
-  filter(state %in% c("IL","IN","MI","OH","WI","IA","KS","MN","MO","NE","ND","SD"))%>%
-   summarize( midwest = sum(Total_votes))
-```
-```{r}
-south <- poll_results%>%
-  filter(state %in% c("FL","DE","GA","MD","NC","SC","VA","DC","WV","AL","KY","MI","TN","AR","LA","OK","TX")) %>%
-  summarize(South = sum(Total_votes))
-```
-```{r}
-west <- poll_results%>%
-  filter(state %in% c("AZ","CO","ID","MT","NV","UT","NM","WY","AK","CA","OR","HI","WA"))%>%
-  summarize( West = sum(Total_votes))
-```
-
-
 
