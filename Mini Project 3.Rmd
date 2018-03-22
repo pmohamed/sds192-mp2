@@ -27,14 +27,14 @@ poll_results <- house_elections%>%
 
 ```{r setup, echo = FALSE, message = FALSE}
 northeast <- poll_results%>%
- filter(state %in% c("CT","ME","MA","NH","RI","VT","NJ","NY","PA"))
+ filter(state %in% c("CT","MA","NH","NJ","NY","PA"))
 ```
 graph 2
 ```{r}
-poll_graph <- ggplot(northeast, aes(x = "CT","ME","MA","NH","RI","VT","NJ","NY","PA" , y = Total_votes, fill = party)) +
+poll_graph <- ggplot(northeast, aes(x = "CT","MA","NH","NJ","NY","PA" , y = Total_votes, fill = party)) +
   geom_bar(stat = "identity", position = "dodge")+
   xlab("State")+
-  ylab("Total Votes") + facet_wrap(~state)
+  ylab("Total Votes") + facet_wrap(~state) + scale_fill_manual(values=c("BLUE", "RED"))
   
 poll_graph
 ```
