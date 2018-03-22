@@ -12,7 +12,7 @@ library(dplyr)
 library(tidyverse)
 ```
 
-```{r setup, echo = FALSE, message = FALSE}
+```{r, echo = FALSE, message = FALSE}
 load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")

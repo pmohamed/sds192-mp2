@@ -18,9 +18,25 @@ library(tidyverse)
 ```{r setup, echo = FALSE, message = FALSE}
 poll_results <- house_elections %>% filter(party == "R" | party == "D") %>% mutate(Total_votes = general_votes + primary_votes)
 ```
+```{r}
+Northeast <- poll_results %>% filter(state %in% c("CT", "ME","MA", "NH", "RI", "VT", "NY", "NJ", "PA", "NY")) %>%
+  summarize(Northeast = sum(Total_votes)) 
+```
+```{r}
+Midwest <- poll_results %>% filter(state %in% c("IL", "IN","MI", "OH", "WI", "IA", "KS", "MN", "MO", "NE", "ND", "SD")) %>%
+  summarize(Midwest = sum(Total_votes)) 
+```
+```{r}
+South <- poll_results %>% filter(state %in% c("FL", "DE","GA", "MD", "NC", "SC", "VA", "DC", "WV", "AL", "KY", "MI", "TN", "AR", "LA", "OK", "TX")) %>%
+  summarize(South = sum(Total_votes)) 
+```
+```{r}
+West <- poll_results %>% filter(state %in% c("AZ", "CO","ID", "MT", "NV", "NM", "UT", "WY", "AK", "CA", "OR", "HI", "WA")) %>%
+  summarize(West = sum(Total_votes)) 
+```
 
 ```{r setup, echo = FALSE, message = FALSE}
-poll_graph <- ggplot(poll_results, aes(x = state, y = Total_votes, fill = party)) + geom_bar(stat = "identity", position = "dodge") + xlab("State") + ylab("Total Votes") + facet_wrap(~state)
+poll_graph <- ggplot(poll_results, aes(x = state, y = Total_votes, fill = party)) + geom_bar(stat = "identity", position = "dodge") + xlab("Region") + ylab("Total Votes") 
 
 poll_graph
 ```
