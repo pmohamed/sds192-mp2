@@ -34,7 +34,7 @@ northeast_contributions <- contributions%>%
 northeast <- poll_results%>%
  filter(state %in% c("CT","MA","NH","NJ","NY","PA"))
 ```
-used Inner-join to join contributions and votes by "state"
+used Inner-join to join contributions and votes by "state". Then created a new dataset that has the contribution and votes data sets but filtered for the 6 Northeastern states. We then grouped by party and state and summarised by transaction amount to make the data more managable
 
 ```{r}
 contributions_votes <- northeast_contributions %>% inner_join(northeast, by="state")
