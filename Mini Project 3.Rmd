@@ -30,10 +30,10 @@ northeast_contributions <- contributions%>%
 
 used Inner-join to join contributions and votes by "state"
 ```{r setup, echo = FALSE, message = FALSE}
-northeast <- poll_results%>%
- filter(state %in% c("CT","MA","NH","NJ","NY","PA"))
+northeast_contributions <- contributions%>%  
+  filter(state %in% c("CT","MA","NH","NJ","NY","PA"))
 ```
-<<<<<<< HEAD
+
 used Inner-join to join contributions and votes by "state". Then created a new dataset that has the contribution and votes data sets but filtered for the 6 Northeastern states. We then grouped by party and state and summarised by transaction amount to make the data more managable
 
 ```{r}
@@ -49,24 +49,10 @@ graph 2
 poll_graph <- ggplot(northeast, aes(x = "CT","MA","NH","NJ","NY","PA")) +
   geom_bar(aes(fill = party)) +  xlab("State")+
   ylab("Total Votes") + scale_fill_manual(values=c("BLUE", "RED")) 
-=======
-```{r}
-northeast_contributions %>% inner_join(northeast, by="state")
+
+
 ```
 
-
-```{r}
-poll_graph <- ggplot(northeast, aes(x = "CT","MA","NH","NJ","NY","PA" , y = Total_votes, fill = party)) +
-  geom_bar(stat = "identity", position = "dodge")+
-  xlab("State")+
-  ylab("Total Votes") + facet_wrap(~state) + scale_fill_manual(values=c("BLUE", "RED")) 
->>>>>>> ca77fc21055ca7234047ebf9a3b5b1eae29f6724
-  
-poll_graph
-```
-
-
-<<<<<<< HEAD
 ```{r}
 poll_graph <- ggplot(contributions_votes2, aes(x = party, y = sum)) +
   geom_bar(stat = "identity") + facet_wrap(~state)
@@ -75,10 +61,8 @@ poll_graph <- ggplot(contributions_votes2, aes(x = party, y = sum)) +
 poll_graph
 ```
 
+We isolated the six Northeast states and looked at how many contributions each party was able to get. Contributions are a pivotal component of the election and if a party isn’t able to get ample contributions (in terms of transaction amounts), then it is quite unlikely that the candidates are able to succeed in securing office. As the graph displays we can see that overall, it is the Democratic and the Republican party that are able to secure the most contributions. 
+
+	It is interesting to note that in New Haven there aren’t very many contributions for any of the parties in the data set. We can see that in Connecticut and Pennsylvania, Republican contributions outweigh the other parties indicating that these states are primarily Republican. Whereas, Massachusetts, New York and New Jersey are primary Democratic states. 
 
 
-
-
-
-=======
->>>>>>> ca77fc21055ca7234047ebf9a3b5b1eae29f6724
