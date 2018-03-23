@@ -57,7 +57,7 @@ poll_graph
 ```{r}
 poll_graph <- ggplot(contributions_votes, aes(x = state)) +
   geom_bar(aes(y = Total_votes, fill = party), stat = "identity") + 
-  geom_bar(aes(y = transaction_amt, fill = party), stat = "identity" ) + facet_wrap(~state)
+  geom_bar(aes(y = transaction_amt, fill = party), stat = "identity")  
   
 
 poll_graph
