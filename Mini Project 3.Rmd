@@ -38,7 +38,7 @@ northeast <- poll_results%>%
 northeast_contributions %>% inner_join(northeast, by="state")
 ```
 
-graph 2
+
 ```{r}
 poll_graph <- ggplot(northeast, aes(x = "CT","MA","NH","NJ","NY","PA" , y = Total_votes, fill = party)) +
   geom_bar(stat = "identity", position = "dodge")+
