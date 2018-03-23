@@ -5,69 +5,56 @@ date: "March 21, 2018"
 output: html_document
 code_folding: hide
 ---
-
-```{r setup, echo = FALSE, message = FALSE}
+Loading the packages
+```{r echo = FALSE, message = FALSE}
 library(ggplot2)
 library(dplyr)
 library(tidyverse)
 ```
 
-```{r, echo = FALSE, message = FALSE}
+Loading the datasets 
+```{r echo = FALSE, message = FALSE}
 load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")
 load("contributions.rda")
 ```
 
-```{r setup, echo = FALSE, message = FALSE}
+Creating a new column called 'Total_votes' by adding the general_votes and primary_votes in the house_elections dataset
+```{r echo = FALSE, message = FALSE}
 poll_results <- house_elections%>%
 mutate(Total_votes = general_votes + primary_votes) 
 ```
-```{r}
+
+Filtering the contributions data by only 6 states in the northeast
+```{r echo = FALSE, message = FALSE}
 northeast_contributions <- contributions%>%  
   filter(state %in% c("CT","MA","NH","NJ","NY","PA"))
 ```
 
-used Inner-join to join contributions and votes by "state"
-```{r setup, echo = FALSE, message = FALSE}
-northeast <- poll_results%>%
- filter(state %in% c("CT","MA","NH","NJ","NY","PA"))
-```
-<<<<<<< HEAD
-used Inner-join to join contributions and votes by "state". Then created a new dataset that has the contribution and votes data sets but filtered for the 6 Northeastern states. We then grouped by party and state and summarised by transaction amount to make the data more managable
-
-```{r}
+Used Inner-join to join contributions and votes by 'state'
+```{r echo = FALSE, message = FALSE}
 contributions_votes <- northeast_contributions %>% inner_join(northeast, by="state")
+```
 
+Grouped data by political party in each of the six states, and calculated total transaction amounts
+```{r echo = FALSE, message = FALSE}
 contributions_votes2 <- contributions_votes %>% filter(state %in% c("CT","MA","NH","NJ","NY","PA"))%>%
   group_by(party, state) %>%
   summarise(sum = sum(transaction_amt))
 ```
 
-graph 2
-```{r}
+Data graphed by political party vs total votes
+```{r echo = FALSE, message = FALSE}
 poll_graph <- ggplot(northeast, aes(x = "CT","MA","NH","NJ","NY","PA")) +
   geom_bar(aes(fill = party)) +  xlab("State")+
   ylab("Total Votes") + scale_fill_manual(values=c("BLUE", "RED")) 
-=======
-```{r}
-northeast_contributions %>% inner_join(northeast, by="state")
+
+
 ```
 
-
-```{r}
-poll_graph <- ggplot(northeast, aes(x = "CT","MA","NH","NJ","NY","PA" , y = Total_votes, fill = party)) +
-  geom_bar(stat = "identity", position = "dodge")+
-  xlab("State")+
-  ylab("Total Votes") + facet_wrap(~state) + scale_fill_manual(values=c("BLUE", "RED")) 
->>>>>>> ca77fc21055ca7234047ebf9a3b5b1eae29f6724
-  
-poll_graph
-```
-
-
-<<<<<<< HEAD
-```{r}
+Data graphed by political party vs total contribution amounts and facet wrapped by state
+```{r echo = FALSE, message = FALSE}
 poll_graph <- ggplot(contributions_votes2, aes(x = party, y = sum)) +
   geom_bar(stat = "identity") + facet_wrap(~state)
   
@@ -75,10 +62,10 @@ poll_graph <- ggplot(contributions_votes2, aes(x = party, y = sum)) +
 poll_graph
 ```
 
+In summary, we used Inner-join to join contributions and votes by "state". Then created a new dataset that has the contribution and votes data sets but filtered for the 6 Northeastern states. We then grouped by party and state and summarised by transaction amount to make the data more managable
+
+We isolated the six Northeast states and looked at how many contributions each party was able to get. Contributions are a pivotal component of the election and if a party isn’t able to get ample contributions (in terms of transaction amounts), then it is quite unlikely that the candidates are able to succeed in securing office. As the graph displays we can see that overall, it is the Democratic and the Republican party that are able to secure the most contributions. 
+
+	It is interesting to note that in New Haven there aren’t very many contributions for any of the parties in the data set. We can see that in Connecticut and Pennsylvania, Republican contributions outweigh the other parties indicating that these states are primarily Republican. Whereas, Massachusetts, New York and New Jersey are primary Democratic states. 
 
 
-
-
-
-=======
->>>>>>> ca77fc21055ca7234047ebf9a3b5b1eae29f6724
