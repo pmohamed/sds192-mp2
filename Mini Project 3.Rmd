@@ -22,8 +22,7 @@ load("contributions.rda")
 We are filtering the democrats and republicans out of the house elections data set and also we ate creating a new column for the total numer of votes (which consists of the primary votes and the general votes)
 ```{r setup, echo = FALSE, message = FALSE}
 poll_results <- house_elections%>%
-  filter(party == "R"| party == "D")%>%
-  mutate(Total_votes = general_votes + primary_votes) 
+mutate(Total_votes = general_votes + primary_votes) 
 ```
 Below we are filtering the northeast states from the contributions dataset
 ```{r}
@@ -38,26 +37,26 @@ northeast <- poll_results%>%
 used Inner-join to join contributions and votes by "state"
 
 ```{r}
-contributions_votes <- northeast_contributions %>% left_join(northeast, by="state")
+contributions_votes <- northeast_contributions %>% inner_join(northeast, by="state")
+
+contributions_votes2 <- contributions_votes %>% filter(state %in% c("CT","MA","NH","NJ","NY","PA"))%>%
+  group_by(party, state) %>%
+  summarise(sum = sum(transaction_amt))
 ```
 
 graph 2
 ```{r}
 poll_graph <- ggplot(northeast, aes(x = "CT","MA","NH","NJ","NY","PA")) +
-  geom_bar(aes(fill = party))
-
-
-  xlab("State")+
-  ylab("Total Votes") + facet_wrap(~state) + scale_fill_manual(values=c("BLUE", "RED")) 
+  geom_bar(aes(fill = party)) +  xlab("State")+
+  ylab("Total Votes") + scale_fill_manual(values=c("BLUE", "RED")) 
   
 poll_graph
 ```
 
 
 ```{r}
-poll_graph <- ggplot(contributions_votes, aes(x = state)) +
-  geom_bar(aes(y = Total_votes, fill = party), stat = "identity") + 
-  geom_bar(aes(y = transaction_amt, fill = party), stat = "identity")  
+poll_graph <- ggplot(contributions_votes2, aes(x = party, y = sum)) +
+  geom_bar(stat = "identity") + facet_wrap(~state)
   
 
 poll_graph
