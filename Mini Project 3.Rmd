@@ -55,13 +55,13 @@ poll_graph <- ggplot(northeast, aes(x = "CT","MA","NH","NJ","NY","PA")) +
 
 ```{r}
 poll_graph <- ggplot(contributions_votes2, aes(x = party, y = sum)) +
-  geom_bar(stat = "identity") + facet_wrap(~state)
+  geom_bar(stat = "identity") + facet_wrap(~state) + xlab("Party") + ylab("Total Contribution Amount")
   
 
 poll_graph
 ```
 
-We isolated the six Northeast states and looked at how many contributions each party was able to get. Contributions are a pivotal component of the election and if a party isn’t able to get ample contributions (in terms of transaction amounts), then it is quite unlikely that the candidates are able to succeed in securing office. As the graph displays we can see that overall, it is the Democratic and the Republican party that are able to secure the most contributions. 
+it is a known that parties are able to excel and perform extremely well when there are ample contributions and these contributions are used to furthere their political cause. This is why we wanted to focus on the contributions ( in terms of transaction amounts) that political parties get. We isolated the six Northeast states and looked at how many contributions each party was able to get. Contributions are a pivotal component of the election and if a party isn’t able to get ample contributions, then it is quite unlikely that the candidates are able to succeed in securing office. As the graph displays we can see that overall, it is the Democratic and the Republican party that are able to secure the most contributions. This si why in most major U.S. elections it is these two parties that are able to surmount the obstacles and gain momentum in elections. 
 
 	It is interesting to note that in New Haven there aren’t very many contributions for any of the parties in the data set. We can see that in Connecticut and Pennsylvania, Republican contributions outweigh the other parties indicating that these states are primarily Republican. Whereas, Massachusetts, New York and New Jersey are primary Democratic states. 
 
